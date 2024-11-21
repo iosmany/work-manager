@@ -1,1 +1,1 @@
-This project looks to show how works channels in csharp with a comprehensive approach.
+This project looks to show how channels work in csharp with a comprehensive approach.
