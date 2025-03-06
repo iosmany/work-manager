@@ -27,7 +27,7 @@ namespace Workmanager
         }
 
         bool closed;
-        public async Task CompletoAsync()
+        public async Task DoneAsync()
         {
             if (closed)
                 return;
@@ -38,12 +38,12 @@ namespace Workmanager
                 throw new AggregateException(_exceptions);
         }
 
-        public ValueTask OpenWorkAsync(Func<Task> trabajo)
+        public ValueTask OpenWorkAsync(Func<Task> work)
         {
             if (closed)
                 throw new Exception("No more work, the channel is closed.");
 
-            return _channel.Writer.WriteAsync(trabajo);
+            return _channel.Writer.WriteAsync(work);
         }
 
         async Task ExecuteAsync()
@@ -74,7 +74,7 @@ namespace Workmanager
             Console.WriteLine("Disposing...");
             if (disposed)
                 return;
-            await CompletoAsync();
+            await DoneAsync();
             disposed = true;
         }
     }
